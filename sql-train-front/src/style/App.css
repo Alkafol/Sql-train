@@ -1,0 +1,222 @@
+* {
+    margin: 0;
+}
+
+.task_description {
+    position: relative;
+    margin: 10px;
+    height: 25vh;
+    background-color: white;
+    padding: 10px;
+    border-width: 3px;
+    border-style: solid;
+    border-radius: 15px;
+    border-color: #97A2B0;
+}
+
+.table_structure {
+    margin: 10px;
+    height: 25vh;
+    background-color: white;
+    border-width: 3px;
+    border-style: solid;
+    border-radius: 15px;
+    border-color: #97A2B0;
+    padding: 10px;
+}
+
+.tasks_list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+    height: 65vh;
+    background-color: white;
+    border-width: 3px;
+    border-style: solid;
+    border-radius: 15px;
+    border-color: #97A2B0;
+}
+
+.sql_input_field {
+    height: 100%;
+    width: 100%;
+    border: none;
+    outline: none;
+    resize: none;
+}
+
+.sql_input_div {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border-radius: 15px;
+    border-color: #97A2B0;
+    border-style: solid;
+    background-color: white;
+    border-width: 3px;
+    height: calc(35vh - 20px);
+    margin: 10px;
+}
+
+
+.result_set {
+    height: calc(30vh - 45px);
+    background-color: white;
+    padding: 10px;
+    border-width: 3px;
+    border-style: solid;
+    border-radius: 15px;
+    border-color: #97A2B0;
+    margin: 10px;
+}
+
+.task:hover {
+    transform: translateY(-0.25em);
+}
+
+.task {
+    width: 80%;
+    height: 20%;
+    margin-top: 5%;
+    margin-left: 7%;
+    margin-right: 7%;
+    padding: 3%;
+    border-width: 3px;
+    border-radius: 15px;
+    background-color: #D8E6FA;
+    list-style-type: none;
+}
+
+ul {
+    padding-inline-start: 0;
+}
+
+.first_column {
+    display: flex;
+    flex-direction: column;
+    width: 33%;
+}
+
+.second_column {
+    display: flex;
+    flex-direction: column;
+    width: 63%;
+}
+
+.submit_button, .solution_button, .next_task_button, .prev_task_button {
+    width: 100px;
+    min-height: 30px;
+    align-self: flex-end;
+    margin-right: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    border-color: #97A2B0;
+}
+
+.submit_button:hover, .solution_button:hover, .next_task_button:hover, .prev_task_button:hover {
+    background-color: lightgray;
+}
+
+.submit_button:active, .solution_button:active, .next_task_button:active, .prev_task_button:active {
+    background-color: white;
+}
+
+table {
+    border: none;
+    border-spacing: 0px;
+    height: 90%;
+}
+
+td, th {
+    border-bottom: 2px solid lightgray;
+    border-right: 2px solid lightgray;
+    border-left: none;
+    padding: 2px 5px;
+}
+
+th:last-child, td:last-child {
+    border-right: none;
+}
+
+tr:nth-child(even) {
+    background-color: rgb(0 0 0 / 5%);
+}
+
+table {
+    overflow-y: scroll;
+    height: 155px;
+    display: block;
+}
+
+.button_block {
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+}
+
+/* scroll bar*/
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb:active {
+    background: rgba(0, 0, 0, .4);
+}
+
+
+.App {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.task_description_text {
+    height: 100%;
+    overflow-y: auto
+}
+
+@media screen and (max-width: 800px) {
+    .App {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .first_column {
+        width: 90%;
+    }
+
+    .second_column {
+        width: 90%;
+    }
+
+    .button_block {
+        position: static;
+    }
+
+    .task_description_text {
+        height: auto;
+    }
+
+    .task_description{
+        overflow-y: scroll;
+    }
+}
