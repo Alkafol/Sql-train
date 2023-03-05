@@ -32,7 +32,7 @@ function App() {
     }, [answerColor])
 
     function executeSql(sql) {
-        let request = "http://localhost:8080/submit/" + currentTask.id + "/" + encodeURIComponent(sql);
+        let request = process.env.BACKEND_URL + "/submit/" + currentTask.id + "/" + encodeURIComponent(sql);
         console.log("request", request)
         axios.get(request).then(res => {
             if (res.data.isCorrect) {
@@ -70,7 +70,7 @@ function App() {
     }
 
     function getAllTasks() {
-        axios.get("http://localhost:8080/getAllTasks").then(res => {
+        axios.get(process.env.BACKEND_URL + "/getAllTasks").then(res => {
             let data = res.data
             console.log(data)
 
@@ -85,7 +85,7 @@ function App() {
 
     async function getTaskSolution(taskId) {
         if (!currentTaskSolution) {
-            axios.get("http://localhost:8080/getSolution/" + taskId).then(res => {
+            axios.get(process.env.BACKEND_URL + "/getSolution/" + taskId).then(res => {
                 setCurrentTaskSolution(res.data)
             })
         } else {
