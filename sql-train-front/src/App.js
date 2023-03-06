@@ -26,6 +26,7 @@ function App() {
     const [currentQuery, setCurrentQuery] = useState('')
     const [currentTaskSolution, setCurrentTaskSolution] = useState(undefined)
     const [resultMessage, setResultMessage] = useState(undefined)
+    const [tasksFetchingState, setTasksFetchingState] = useState(true)
 
     // not sure if it's needed
     useEffect(() => {
@@ -33,7 +34,7 @@ function App() {
 
     function executeSql(sql) {
         let request = process.env.REACT_APP_BACKEND_URL + "/submit/" + currentTask.id + "/" + encodeURIComponent(sql);
-        console.log("request", request)
+
         axios.get(request).then(res => {
             if (res.data.isCorrect) {
                 setAnswerColor('#46A356');
@@ -70,15 +71,17 @@ function App() {
     }
 
     function getAllTasks() {
+        setTasksFetchingState(true)
+
         axios.get(process.env.REACT_APP_BACKEND_URL + "/getAllTasks").then(res => {
             let data = res.data
-            console.log(data)
 
             data.map((taskData) => taskData.taskColor = '#97A2B0')
             data.map((taskData) => taskData.leftedInput = '')
             data[0].backgroundColor = '#BDC9DB'
 
             setCurrentTask({id: data[0].taskId, description: data[0].description})
+            setTasksFetchingState(false)
             setTasksData(data)
         })
     }
@@ -133,7 +136,7 @@ function App() {
             <div className="first_column">
                 <TableStructure/>
                 <div className="tasks_list">
-                    <TaskList data={tasksData} clickEvent={changeTask}/>
+                    <TaskList fetchingState={tasksFetchingState} data={tasksData} clickEvent={changeTask}/>
                 </div>
             </div>
             <div className="second_column">

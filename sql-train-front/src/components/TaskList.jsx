@@ -1,12 +1,14 @@
 import React from "react";
+import waitingGif from '../gifs/waiting.gif'
 
 const TaskList = function (props) {
+    const state = props.fetchingState
 
-    console.log(props)
     return (
-        <div style={{paddingRight: "8px", height: "100%"}}>
-            <h2 style={{marginLeft: "10px", marginTop: "5px", marginBottom: "10px"}}>Tasks list</h2>
-            <div style={{overflowY: "auto", height: "90%"}}>
+        <div style={{height: "100%", width: "100%", display: "flex", flexDirection: "column"}}>
+            <h2 style={{marginBottom: "10px"}}>Tasks list</h2>
+            {state ? <img style={{alignSelf: "center", margin: "auto", width: "30%"}} src={waitingGif} alt={""}/> : null}
+            {state ? null : <div style={{overflowY: "auto", height: "90%"}}>
                 <ul>
                     {props.data.map((val) => <li
                         style={{borderColor: val.taskColor, borderStyle: "solid", backgroundColor: val.backgroundColor}}
@@ -16,6 +18,7 @@ const TaskList = function (props) {
                     })}>{val.description}</li>)}
                 </ul>
             </div>
+            }
         </div>
     )
 }
