@@ -2,6 +2,7 @@ package com.example.sqltrain.controllers;
 
 import com.example.sqltrain.dto.TaskDto;
 import com.example.sqltrain.dto.UserFeedbackDto;
+import com.example.sqltrain.models.DatabaseName;
 import com.example.sqltrain.services.SqlTrainService;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,9 +31,8 @@ public class SqlTrainController {
         return sqlTrainService.getSolution(taskId);
     }
 
-    @GetMapping("/getAllTasks")
-    public List<TaskDto> getAllTasks(){
-        var a = sqlTrainService.getAllTasks();
-        return a;
+    @GetMapping("/getAllTasks/{databaseName}")
+    public List<TaskDto> getAllTasks(@PathVariable String databaseName){
+        return sqlTrainService.getAllTasks(DatabaseName.valueOf(databaseName));
     }
 }

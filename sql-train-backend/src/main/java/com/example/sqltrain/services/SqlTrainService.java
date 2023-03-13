@@ -3,6 +3,7 @@ package com.example.sqltrain.services;
 import com.example.sqltrain.dto.TaskDto;
 import com.example.sqltrain.dto.UserFeedbackDto;
 import com.example.sqltrain.exceptions.QueryException;
+import com.example.sqltrain.models.DatabaseName;
 import com.example.sqltrain.models.Task;
 import com.example.sqltrain.repositories.TasksRepository;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,8 +17,10 @@ import java.util.NoSuchElementException;
 
 @Service
 public class SqlTrainService {
-    @Value("${sql.train.db}")
-    String sqlTrainDatabaseUrl;
+    @Value("${customers.db}")
+    String customersDatabaseUrl;
+    @Value("${films.db}")
+    String filmsDatabaseUrl;
 
     TasksRepository tasksRepository;
 
@@ -26,10 +29,12 @@ public class SqlTrainService {
     }
 
     public UserFeedbackDto checkSolution(Integer taskId, String query){
-        String solution = tasksRepository.findById(taskId).orElseThrow(NoSuchElementException::new).getSolution();
+        Task task = tasksRepository.findById(taskId).orElseThrow(NoSuchElementException::new);
+        String solution = task.getSolution();
+        String url = task.getDatabaseName() == DatabaseName.CUSTOMERS ? customersDatabaseUrl : filmsDatabaseUrl;
 
-        List<List<String>> correctTable = runQuery(solution);
-        List<List<String>> userQueryTable = runQuery(query);
+        List<List<String>> correctTable = runQuery(solution, url);
+        List<List<String>> userQueryTable = runQuery(query, url);
 
         var correctTableData = correctTable.subList(1, correctTable.size());
         var userQueryTableData = userQueryTable.subList(1, userQueryTable.size());
@@ -42,13 +47,16 @@ public class SqlTrainService {
         return tasksRepository.findById(taskId).orElseThrow(NoSuchElementException::new).getSolution();
     }
 
-    public List<TaskDto> getAllTasks(){
-        return tasksRepository.findAll().stream().sorted(Comparator.comparing(Task::getTaskId)).map(task -> new TaskDto(task.getTaskId().toString(), task.getDescription())).toList();
+    public List<TaskDto> getAllTasks(DatabaseName name){
+        return tasksRepository.findAll().stream()
+                .filter(a -> a.getDatabaseName().equals(name))
+                .sorted(Comparator.comparing(Task::getTaskId))
+                .map(task -> new TaskDto(task.getTaskId().toString(), task.getDescription()))
+                .toList();
     }
 
-    private List<List<String>> runQuery(String query){
+    private List<List<String>> runQuery(String query, String url){
         List<List<String>> result = new ArrayList<>();
-        String url = sqlTrainDatabaseUrl;
 
         try (Connection connection = DriverManager.getConnection(url);
              Statement statement = connection.createStatement();

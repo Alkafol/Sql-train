@@ -1,9 +1,6 @@
 package com.example.sqltrain.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "tasks", schema = "public")
@@ -14,10 +11,14 @@ public class Task {
     private String description;
     private String solution;
 
-    public Task(Integer taskId, String description, String solution) {
+    @Enumerated(EnumType.STRING)
+    private DatabaseName databaseName;
+
+    public Task(Integer taskId, String description, String solution, DatabaseName databaseName) {
         this.taskId = taskId;
         this.description = description;
         this.solution = solution;
+        this.databaseName = databaseName;
     }
 
     public Task() {
@@ -35,6 +36,10 @@ public class Task {
         this.solution = solution;
     }
 
+    public void setDatabaseName(DatabaseName databaseName){
+        this.databaseName = databaseName;
+    }
+
     public Integer getTaskId() {
         return taskId;
     }
@@ -45,5 +50,9 @@ public class Task {
 
     public String getSolution() {
         return solution;
+    }
+
+    public DatabaseName getDatabaseName(){
+        return databaseName;
     }
 }
