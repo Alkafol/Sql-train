@@ -116,11 +116,29 @@ ul {
     border-color: #97A2B0;
 }
 
-.submit_button:hover, .solution_button:hover, .next_task_button:hover, .prev_task_button:hover {
+.try_out_button {
+    width: 100px;
+    min-height: 30px;
+    align-self: flex-end;
+    margin-top: auto;
+    border-radius: 10px;
+    border-color: #97A2B0;
+}
+
+.main_page_button{
+    width: 100px;
+    height: 30px;
+    margin-left: auto;
+    border-radius: 10px;
+    border-color: #97A2B0;
+    margin-right: 20px;
+}
+
+.submit_button:hover, .solution_button:hover, .next_task_button:hover, .prev_task_button:hover, .try_out_button:hover, .main_page_button:hover {
     background-color: lightgray;
 }
 
-.submit_button:active, .solution_button:active, .next_task_button:active, .prev_task_button:active {
+.submit_button:active, .solution_button:active, .next_task_button:active, .prev_task_button:active, .try_out_button:active, .main_page_button:active {
     background-color: white;
 }
 

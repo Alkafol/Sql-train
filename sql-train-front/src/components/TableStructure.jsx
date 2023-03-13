@@ -1,14 +1,17 @@
 import React from "react";
+import {useNavigate} from "react-router-dom";
 
-const TableStructure = function (){
+const TableStructure = function (props) {
+    const navigate = useNavigate();
 
-    return(
+    return (
         <div className="table_structure">
-            <h2 style={{marginBottom: "5px"}}>Table structure</h2>
+            <div style={{display: "flex", width: "100"}}>
+                <h2 style={{marginBottom: "5px"}}>Database structure</h2>
+                <button onClick={() => navigate("/main")} className="main_page_button">Main page</button>
+            </div>
             <div style={{overflowY: "auto", height: "80%"}}>
-            <p style={{marginLeft: "2px"}}>Table "customers" contains 8 columns: <br/> - customer_id <br/> - first_name <br/> - last_name
-                <br/> - gender <br/> - age <br/> - annual_income <br/> - spending_score <br/> - profession
-                <br/> - family_size </p>
+                <p style={{marginLeft: "2px"}}>{props.description}</p>
             </div>
         </div>
     )
