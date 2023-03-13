@@ -10,14 +10,14 @@ function App() {
             <Routes>
                 <Route path='/main' element={<MainPage/>}/>
                 <Route path='/customers' element={<TrainPage databaseName={"CUSTOMERS"}
-                                                             tableStructure={<p>Table "customers" contains 8
+                                                             tableStructure={<p style={{marginLeft: "2px"}}>Table "customers" contains 8
                                                                  columns: <br/> - customer_id <br/> -
                                                                  first_name <br/> - last_name
                                                                  <br/> - gender <br/> - age <br/> -
                                                                  annual_income <br/> - spending_score <br/> - profession
                                                                  <br/> - family_size </p>}/>}/>
                 <Route path='films' element={<TrainPage databaseName={"FILMS"}
-                                                        tableStructure={<p><b>Table "film" contains 8 columns:</b> <br/> -
+                                                        tableStructure={<p style={{marginLeft: "2px"}}><b>Table "film" contains 8 columns:</b> <br/> -
                                                             film_id <br/> - title <br/> - release_year <br/> -
                                                             language_id <br/> - length <br/> - replacement_cost <br/> -
                                                             rating <br/> - special_features <br/> <b>Table "language"
