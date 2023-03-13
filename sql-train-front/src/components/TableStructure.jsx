@@ -11,7 +11,7 @@ const TableStructure = function (props) {
                 <button onClick={() => navigate("/main")} className="main_page_button">Main page</button>
             </div>
             <div style={{overflowY: "auto", height: "80%"}}>
-                <p style={{marginLeft: "2px"}}>{props.description}</p>
+                {props.description}
             </div>
         </div>
     )

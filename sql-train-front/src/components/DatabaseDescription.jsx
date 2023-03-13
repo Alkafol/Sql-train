@@ -7,7 +7,7 @@ const DatabaseDescription = (props) => {
                 <h3 style={{alignSelf: "center", fontSize: "23px"}}>{props.name}</h3>
                 <p style={{marginTop: "10px", fontSize: "19px"}}>{props.description}</p>
                 <ul style={{margin: "15px"}}>
-                    {props.list.map((val) => <li style={{fontSize: "19px"}}>{val}</li>)}
+                    {props.list.map((val, id) => <li style={{fontSize: "19px"}} key={id}>{val}</li>)}
                 </ul>
                 <button onClick={props.handleClick} className="try_out_button">Try out!</button>
             </div>
